@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Polymers Solubility Estimator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+<style>
+  body {
+  margin-top: 0px; 
+  padding-top: 0px;  
+  background: rgb(158, 157, 157);
+  background: url("https://assemblingsugars.fr/wp-content/uploads/2020/04/Composite-Image-Neuro2A-web.jpg")
+  }
+  .jumbotron {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 2px;
+  background: rgb(46, 182, 159);
+  color: white;
+  }
+  .container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: rgb(243, 243, 217);
+  }
+  p {
+    color:rgb(3, 9, 34);
+    font-size: 16px;
+  }
+  label{
+    color:rgb(170, 253, 221);
+    font-size: 18px;
+    font-weight: 400;
+  }
+.movie{
+  height: 63vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-right: 5vh;
+  margin-left: 5vh;
+  display: block;
+  border-radius: 20px;
+  padding: 1em;
+  width: auto;
+  box-shadow: 0px 0px 10px -4px grey;
+  text-align: center;
+}
+#elnum{
+  width: 15vh;
+  height: 5vh;
+  text-align: center;
+  font-size: large;
+  color: black;
+  }
+#Mw_tot{
+  text-align: center;
+  color: black;
+}
+#submission_button{
+    width: 25%;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 5px;
+    color: white;
+    background-color:rgb(46, 182, 159);
+    border-style: none;
+}
+  #display-1 {
+    color: rgb(7, 1, 32);
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 24px;
+    color: rgb(25, 8, 99);
+  }
+  h3 {
+    font-size: 20px;
+    color: rgb(32, 54, 87);
+  }
+</style> 
+  <div class="container">
+    <div class="row">
+      <div class="jumbotron text-center">
+        <h1>Based on Molecular Formula</h1>
+      </div>
+      <div class="col-md-7">
+        <h2><u>Polymer Solubility Estimator</u></h2>
+      </div>
+    </div>
+
+<hr class="my-4"> 
+
+<h3>Enter number of each element in polymer unit molecular formula, and its total Mw</h3>
+<h4><i>Model accuracy is in a range of <b>74 to 90%</b>.</i></h4>
+<header style="background-image: url(static/css/images/solbg3.jpg)" class="masthead bg-primary text-white text-center">
+<div class="movie">
+
+  <form action="{{ url_for('main') }}" method="POST">
+    {% for i in listel %}
+        <tr>
+          <td>
+            <div class="form-group">
+              <label for="elnum">Number of {{i}} elements:</label>
+              <input id="elnum" type="number" name="elnum" step="1" min="0" max="1000" required>
+              <span class="validity"></span>
+            </div>
+        </td>
+        </tr>
+    {% endfor %}
+    <label for="Mw_tot">Enter total polymer Mw:</label>
+    <input id="Mw_tot" type="number" name="Mw_tot" step="100" min="100" max="1000000000" required>
+    <span class="validity"></span>
+
+    <input type="submit" id="submission_button" value="Submit"/>
+  </form>
+  
+</div>
+</header>
+<p style="color: #5f5959; padding: 0.5em;">The model uses <b>Charles M. Hansen Solubility Data with Neural Network algorithm</b> to estimate solubility, when <i> trained on types and numbers of chemical elements in its unit molecular formula with the total polymer molecular weight.</i> Ease of use can compensate on the current predicting accuarcy. The studied polymers and resins are shown <a href="/read_polymers" target="_blank">here</a>.</p>
+<p style="color: #5f5959; padding: 0.5em;">The solubility was divided into three major categories: soluble (1 = soluble, 2 = almost soluble), 'theta' condition for a neutral interaction (3 = strongly swollen, 4 = swollen), and non-soluble (5 = slight effect, 6 = no visible effect).</p>
+<p>Your solubility data donation will help to increase the model accuracy; emial me <a href="mailto:innag33@gmail.com" target="_blank">here</a>.</p>
+</div>
+<section class="copyright py-4 text-center text-white">
+  <div class="container"><small>Data source: Charles M. Hansen, <i>"The Three Dimensional Solubility Parameter and Solvent Diffusion Coefficinet".</i> Copenhagen Danish Technical press, 1967.
+    <br>
+  Copyright © Inna Gurevitch - "From people to the people"
+</small>
+</div>
+</section>
+
+</body>
+
+</html>
