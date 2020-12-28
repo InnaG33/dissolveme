@@ -11,6 +11,7 @@ from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 app = flask.Flask(__name__, template_folder='templates')
 
 # Load the trained model
+
 solubility_model = load_model("SolubilityModel7_full.h5")
 
 # read the model X and solvents data 
