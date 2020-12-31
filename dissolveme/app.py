@@ -14,8 +14,8 @@ app = flask.Flask(__name__, template_folder='templates')
 # Load the trained model
 
 client_s3 = boto3.client("s3")
-result = client_s3.download_file("dissolveme-ds",'SolubilityModel6_full.h5', "/tmp/SolubilityModel6_full.h5")
-solubility_model = load_model("/tmp/SolubilityModel6_full.h5")
+result = client_s3.download_file("dissolveme-ds",'SolubilityModel7_full.h5', "/tmp/SolubilityModel7_full.h5")
+solubility_model = load_model("/tmp/SolubilityModel7_full.h5")
 
 # read the model X and solvents data 
 X_data=pd.read_csv("https://dissolveme-ds.s3.us-east-2.amazonaws.com/X_model.csv")
