@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify
 
 import pandas as pd
 import numpy as np
+import boto3
 
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
@@ -12,7 +13,9 @@ app = flask.Flask(__name__, template_folder='templates')
 
 # Load the trained model
 
-solubility_model = load_model("SolubilityModel7_full.h5")
+client_s3 = boto3.client("s3")
+result = client_s3.download_file("dissolveme-ds",'SolubilityModel6_full.h5', "/tmp/SolubilityModel6_full.h5")
+solubility_model = load_model("/tmp/SolubilityModel6_full.h5")
 
 # read the model X and solvents data 
 X_data=pd.read_csv("https://dissolveme-ds.s3.us-east-2.amazonaws.com/X_model.csv")
@@ -133,7 +136,7 @@ def main():
 # Join predicted with solvents info to get solvents names
         pred_results=pd.concat([solute_tt_solvents, pred_model_df], axis=1)
         pred_solvents=pred_results[['Solvent', 'Predicted_solubility_category']]
-        lgth=len(pred_solvents)
+#        lgth=len(pred_solvents)
 
         soluble_df = pred_solvents.loc[(pred_solvents['Predicted_solubility_category']=='soluble')]
         non_soluble_df = pred_solvents.loc[(pred_solvents['Predicted_solubility_category']=='non-soluble')]
